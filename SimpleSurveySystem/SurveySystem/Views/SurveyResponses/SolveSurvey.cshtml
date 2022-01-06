@@ -1,0 +1,41 @@
+﻿@model SurveySystem.Models.SurveyResponse
+
+@{
+    ViewData["Title"] = "SolveSurvey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4> @TempData["Title"] </h4>
+
+<h3> Questions </h3>
+
+@{var liste = new SelectList(ViewBag.data3, "ID", "Text"); }
+@{string id = "response"; }
+
+
+@using (Html.BeginForm("SaveResponses", "SurveyResponses", FormMethod.Post))
+{
+    <h4>Please Enter Your Name</h4>
+    <input type="text" id="userName" name="userName" />
+    <input hidden type="text" id="Title" name="Title" value="@TempData["Title"]" />
+
+    @for (int i = 0; i < liste.Count(); i++)
+    {
+        <tr>
+            <td>
+                <br>
+
+                @liste.ElementAt(i).Text
+
+                <br>
+
+                @{ id = "response" + i;}
+
+                <input type="text" id="@id" name="@id" />
+            </td>
+        </tr>
+
+    }
+    <br>
+    <input type="submit" value="Send" />
+}

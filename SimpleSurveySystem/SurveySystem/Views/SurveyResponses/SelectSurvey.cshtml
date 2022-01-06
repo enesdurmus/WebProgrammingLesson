@@ -1,0 +1,22 @@
+﻿@model SurveySystem.Models.SurveyResponse
+
+@{
+    ViewData["Title"] = "SelectSurvey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Select A Survey To Solve</h1>
+
+ @Html.DropDownList("SurveyID", new SelectList(ViewBag.data1, "ID", "Title"))
+
+
+@using (Html.BeginForm("SolveSurvey", "SurveyResponses", FormMethod.Post))
+{
+    <input type="text" name="Title" id="Title" />
+
+    <input type="submit" value="Solve" />
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
